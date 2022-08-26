@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>用户协议</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    #app {
+      padding: 15px 10px;
+      line-height: 1.5
+    }
+
+    #time {
+      text-align: right;
+      margin-top: 20px;
+      color: #999;
+      font-size: 14px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div id="content"></div>
+    <p id="time"></p>
+  </div>
+  <script>
+    var xhr;
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest();
+    } else {
+      xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhr.open("GET", "http://api.bwb688.com/v1/axx/rule?id=7", true);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var res = JSON.parse(xhr.response);
+        if (res.status === 200) {
+          var content = res.data;
+          document.getElementById("content").innerHTML = content;
+        }
+      }
+    };
+  </script>
+</body>
+
+</html>
